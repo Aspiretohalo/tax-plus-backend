@@ -1,0 +1,16 @@
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 8085
+spring:
+  datasource:
+    username: root
+    password: admin123
+    url: jdbc:mysql://localhost:3306/tax-plus?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  servlet:
+    multipart:
+      #单个文件上传大小限制
+      max-file-size: 10MB
+      #一次请求上传多个文件
+      max-request-size: 100MB
