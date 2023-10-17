@@ -33,16 +33,16 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         // 创建新的User对象
         //因为密码不能发出去，所以新建一个对象
-        Course c = new Course();
+//        Course c = new Course();
 //        c.setPhone_number(phone_number);
-        c.setCourse_id(result.getCourse_id());
+//        c.setCourse_id(result.getCourse_id());
         // 通过查询结果向新User对象中封装属性：username,phone
 //        c.setStudent_name(result.getStudent_name());
 //        c.setGender(result.getGender());
 //        c.setAvatar(result.getAvatar());
         // 返回新User对象
-        return c;
-    }
+//        return c;
+//    }
 
 //    @Override
 //    public void updateAvatar(Student student) {
