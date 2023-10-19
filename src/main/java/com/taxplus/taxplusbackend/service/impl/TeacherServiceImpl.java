@@ -14,6 +14,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     @Autowired
     private TeacherMapper teacherMapper;
 
+    //    登录
     @Override
     public Teacher selectTeacher(Teacher teacher) {
         if (teacher.getPhone_number() == null || teacher.getUser_password() == null) {
@@ -44,8 +45,4 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         return t;
     }
 
-    @Override
-    public void updateAvatar(Teacher teacher) {
-        teacherMapper.updateAvatar(teacher);
-    }
 }

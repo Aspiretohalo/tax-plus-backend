@@ -25,6 +25,16 @@ public class Course {
 
     private String tag_type;
 
+    private int choose_amount;
+
+    public int getChoose_amount() {
+        return choose_amount;
+    }
+
+    public void setChoose_amount(int choose_amount) {
+        this.choose_amount = choose_amount;
+    }
+
     public long getCourse_id() {
         return course_id;
     }

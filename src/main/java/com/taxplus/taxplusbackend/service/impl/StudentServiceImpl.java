@@ -14,6 +14,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Autowired
     private StudentMapper studentMapper;
 
+    //登录
     @Override
     public Student selectStudent(Student student) {
         if (student.getPhone_number() == null || student.getUser_password() == null) {
@@ -44,8 +45,4 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         return s;
     }
 
-    @Override
-    public void updateAvatar(Student student) {
-        studentMapper.updateAvatar(student);
-    }
 }

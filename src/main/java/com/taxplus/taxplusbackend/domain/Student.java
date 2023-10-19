@@ -25,7 +25,25 @@ public class Student {
     private String email;
     private Date update_time;
     private float totalLearningTime;
+    private String available_time;
+    private String course_intendencies;
     public String jwt;
+
+    public String getAvailable_time() {
+        return available_time;
+    }
+
+    public void setAvailable_time(String available_time) {
+        this.available_time = available_time;
+    }
+
+    public String getCourse_intendencies() {
+        return course_intendencies;
+    }
+
+    public void setCourse_intendencies(String course_intendencies) {
+        this.course_intendencies = course_intendencies;
+    }
 
     public String getJwt() {
         return jwt;

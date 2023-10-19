@@ -1,6 +1,8 @@
 package com.taxplus.taxplusbackend.controller;
 
 import com.taxplus.taxplusbackend.common.R;
+import com.taxplus.taxplusbackend.domain.Course;
+import com.taxplus.taxplusbackend.domain.Student;
 import com.taxplus.taxplusbackend.domain.Teacher;
 import com.taxplus.taxplusbackend.service.TeacherService;
 import com.taxplus.taxplusbackend.utils.JwtUtils;
@@ -23,7 +25,7 @@ public class TeacherController {
     private TeacherService teacherService;
 
     //    接收前端发来的login请求
-    @PostMapping("/login")
+    @PostMapping("/teacher/login")
     public R<Teacher> login(HttpServletRequest request, @RequestBody Teacher teacher) {
 
         Teacher aUser = new Teacher();
@@ -45,6 +47,32 @@ public class TeacherController {
 
     }
 
+    //    通过手机号来判断是哪个老师
+    @GetMapping("/getTeacherMsg")
+    public Teacher getTeacherMsg(ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        Teacher aUser;
+
+//        判断收到的jwt有没有bear
+        String jwt = req.getHeader("Authorization");
+        String[] jwt2 = jwt.split(" ");
+        Map<String, Object> claims2;
+
+        if (jwt2.length == 1) {
+            log.info("JWT" + jwt);
+            claims2 = JwtUtils.parseJWT(jwt);
+
+//        通过phoneNum来获取数据
+            aUser = teacherService.getInfo((String) claims2.get("phone_number"));
+        } else {
+            log.info("JWT" + jwt2[1]);
+
+            claims2 = JwtUtils.parseJWT(jwt2[1]);
+            aUser = teacherService.getInfo((String) claims2.get("phone_number"));
+        }
+        return aUser;
+    }
 
 
 }

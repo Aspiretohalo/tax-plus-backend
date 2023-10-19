@@ -11,7 +11,6 @@ public interface TeacherService extends IService<Teacher> {
     Teacher getInfo(String phone_number);
 
 
-    void updateAvatar(Teacher teacher);
 
 
 }

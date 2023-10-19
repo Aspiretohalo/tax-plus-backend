@@ -15,8 +15,17 @@ public class Video {
 
     private long course_id;
 
-    private  String video_url;
+    private String video_url;
+    private String courseware_url;
 
+
+    public String getCourseware_url() {
+        return courseware_url;
+    }
+
+    public void setCourseware_url(String courseware_url) {
+        this.courseware_url = courseware_url;
+    }
 
     public long getVideo_id() {
         return video_id;

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taxplus.taxplusbackend.domain.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
 @Mapper
 public interface TeacherMapper extends BaseMapper<Teacher> {
     @Select(value = "select * from teachers where phone_number=#{phone_number} and user_password = #{user_password}")
@@ -13,9 +14,6 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
 
     @Select(value = "SELECT * FROM teachers WHERE phone_number=#{phone_number}")
     Teacher findByPhone(String phone_number);
-
-    @Select(value = "UPDATE teachers SET avatar=#{avatar} WHERE phone_number=#{phone_number}")
-    void updateAvatar(Teacher teacher);
 
 
 }

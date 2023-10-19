@@ -23,8 +23,6 @@ public class Teacher {
 
     private int gender;
     private String email;
-    private Date update_time;
-    private float totalLearningTime;
     public String jwt;
 
     public String getJwt() {
@@ -91,19 +89,4 @@ public class Teacher {
         this.email = email;
     }
 
-    public Date getUpdate_time() {
-        return update_time;
-    }
-
-    public void setUpdate_time(Date update_time) {
-        this.update_time = update_time;
-    }
-
-    public float getTotalLearningTime() {
-        return totalLearningTime;
-    }
-
-    public void setTotalLearningTime(float totalLearningTime) {
-        this.totalLearningTime = totalLearningTime;
-    }
 }

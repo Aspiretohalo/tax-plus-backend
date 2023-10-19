@@ -17,9 +17,19 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/course")
+@RequestMapping
 public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @GetMapping("/getCourses")
+    public List<Map<String, Course>> getCourses(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getCourses(Integer.parseInt(student_id));
+
+
+        return list;
+    }
 }
