@@ -11,34 +11,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Slf4j
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowCredentials(false)
-                        .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
-                        .allowedOrigins("*");
-
-            }
-        };
-    }
-
-//    配置虚拟路径映射本地路径
-    /*
-     *addResourceHandler:访问映射路径
-     *addResourceLocations:资源绝对路径
-     */
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("file:D:/0myApp/backend/star-wish-backend/src/main/resources/static/");
+    public void addCorsMappings(CorsRegistry registry) {
+        //设置允许跨域的路径
+        registry.addMapping("/**")
+                //设置允许跨域请求的域名
+                //当**Credentials为true时，**Origin不能为星号，需为具体的ip地址【如果接口不带cookie,ip无需设成具体ip】
+                .allowedOrigins("http://localhost:5173")
+                //是否允许证书 不再默认开启
+                .allowCredentials(true)
+                //设置允许的方法
+                .allowedMethods("*");
     }
-
-
-
 }
 
 

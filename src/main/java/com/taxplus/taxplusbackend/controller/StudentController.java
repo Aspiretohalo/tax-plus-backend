@@ -19,6 +19,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping
+@CrossOrigin(origins = {"http://localhost:5173"})
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -54,6 +55,7 @@ public class StudentController {
         Student aUser;
         aUser = studentService.getInfo("12345678910");
 
+        log.info(String.valueOf(aUser));
 //        判断收到的jwt有没有bear
 //        String jwt = req.getHeader("Authorization");
 //        String[] jwt2 = jwt.split(" ");
