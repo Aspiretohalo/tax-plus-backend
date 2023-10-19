@@ -1,7 +1,7 @@
 package com.taxplus.taxplusbackend.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taxplus.taxplusbackend.domain.Course;
+import com.taxplus.taxplusbackend.domain.*;
 import com.taxplus.taxplusbackend.mapper.CourseMapper;
 import com.taxplus.taxplusbackend.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,5 +30,67 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         return resultArray;
     }
 
+    @Override
+    public List<Map<String, Course>> getAllCourses() {
+        List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
+    public List<Map<String, Comment>> getComment(int course_id) {
+        List<Map<String, Comment>> resultArray = courseMapper.getComment(course_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
+    public List<Map<String, Evaluation>> getEvaluation(int course_id) {
+        List<Map<String, Evaluation>> resultArray = courseMapper.getEvaluation(course_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
+    public List<Map<String, Notice>> getNotice(int course_id) {
+        List<Map<String, Notice>> resultArray = courseMapper.getNotice(course_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
+    public List<Map<String, Video>> getVideo(int course_id) {
+        List<Map<String, Video>> resultArray = courseMapper.getVideo(course_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
 
 }

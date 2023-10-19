@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("")
+@RequestMapping
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -46,30 +46,31 @@ public class StudentController {
 
     }
 
-//    通过手机号来判断是哪个学生
+    //    通过手机号来判断是哪个学生
     @GetMapping("/getStudentMsg")
     public Student getStudentMsg(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
 
         Student aUser;
+        aUser = studentService.getInfo("12345678910");
 
 //        判断收到的jwt有没有bear
-        String jwt = req.getHeader("Authorization");
-        String[] jwt2 = jwt.split(" ");
-        Map<String, Object> claims2;
-
-        if (jwt2.length == 1) {
-            log.info("JWT" + jwt);
-            claims2 = JwtUtils.parseJWT(jwt);
-
-//        通过phoneNum来获取数据
-            aUser = studentService.getInfo((String) claims2.get("phone_number"));
-        } else {
-            log.info("JWT" + jwt2[1]);
-
-            claims2 = JwtUtils.parseJWT(jwt2[1]);
-            aUser = studentService.getInfo((String) claims2.get("phone_number"));
-        }
+//        String jwt = req.getHeader("Authorization");
+//        String[] jwt2 = jwt.split(" ");
+//        Map<String, Object> claims2;
+//
+//        if (jwt2.length == 1) {
+//            log.info("JWT" + jwt);
+//            claims2 = JwtUtils.parseJWT(jwt);
+//
+////        通过phoneNum来获取数据
+////            aUser = studentService.getInfo((String) claims2.get("phone_number"));
+//        } else {
+//            log.info("JWT" + jwt2[1]);
+//
+//            claims2 = JwtUtils.parseJWT(jwt2[1]);
+//            aUser = studentService.getInfo((String) claims2.get("phone_number"));
+//        }
         return aUser;
     }
 

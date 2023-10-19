@@ -7,5 +7,4 @@ import com.taxplus.taxplusbackend.domain.Video;
 
 public interface VideoService extends IService<Video>{
 
-    Video selectVideo(Video video);
 }

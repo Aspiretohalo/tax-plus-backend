@@ -11,6 +11,4 @@ public interface StudentService extends IService<Student> {
     Student getInfo(String phone_number);
 
 
-
-
 }

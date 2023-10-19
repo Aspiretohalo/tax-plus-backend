@@ -7,7 +7,6 @@ public interface TeacherService extends IService<Teacher> {
 
     Teacher selectTeacher(Teacher teacher);
 
-
     Teacher getInfo(String phone_number);
 
 

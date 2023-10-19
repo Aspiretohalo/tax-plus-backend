@@ -18,16 +18,10 @@ import org.springframework.stereotype.Service;
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements VideoService {
 
 
-    @Autowired
+    @Autowired(required = false)
     private VideoMapper videoMapper;
 
-    @Override
-    public Video selectVideo(Video video) {
-        if ( video.getVideo_url() == null) {
-            return null;
-        }
-        return videoMapper.selectonevideo(video);
-    }
+
 
 
 

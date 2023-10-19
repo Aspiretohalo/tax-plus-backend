@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 @Slf4j
 @RestController
-@RequestMapping("/video")
+@RequestMapping
 public class VideoController {
     @Autowired
     private VideoService videoService;
