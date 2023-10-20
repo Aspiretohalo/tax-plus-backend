@@ -29,10 +29,17 @@ public class CourseController {
 
         List<Map<String, Course>> list;
         list = courseService.getCourses(Integer.parseInt(student_id));
-
-
         return list;
     }
+
+//    @PostMapping("/getTeacherName")
+//    public String getTeacher_name(@RequestParam("course_teacher") String course_teacher, ServletRequest request, ServletResponse response) {
+//        HttpServletRequest req = (HttpServletRequest) request;
+//
+//        String teacher_id;
+//        teacher_id = courseService.getTeacher_name(Integer.parseInt(course_teacher));
+//        return teacher_id;
+//    }
 
     /*获取所有课程*/
     @GetMapping("/getAllCourses")
@@ -81,6 +88,7 @@ public class CourseController {
 
         return list;
     }
+
     //    获取某一门课程的评论video
     @GetMapping("/course/getVideo")
     public List<Map<String, Video>> getVideo(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {

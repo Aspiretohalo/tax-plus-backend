@@ -11,9 +11,11 @@ import java.util.Map;
 
 public interface CourseMapper extends BaseMapper<Course> {
 
-
-    @Select(value = "SELECT Courses.* FROM CourseProgress JOIN Courses ON CourseProgress.course_id = Courses.course_id WHERE CourseProgress.student_id = #{student_id};")
+    @Select(value = "SELECT Courses.*, Teachers.teacher_name FROM CourseProgress JOIN Courses ON CourseProgress.course_id = Courses.course_id JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE CourseProgress.student_id = #{student_id};")
     List<Map<String, Course>> getCourses(int student_id);
+
+//    @Select(value = "SELECT teacher_name FROM Teachers WHERE teacher_id = #{teacher_id};")
+//    String getTeacher_name(int teacher_id);
 
     @Select(value = "SELECT * FROM Courses")
     List<Map<String, Course>> getAllCourses();

@@ -9,9 +9,8 @@ import java.util.Map;
 public interface CourseService extends IService<Course>{
 
     List<Map<String, Course>> getCourses(int student_id);
-
+//    String getTeacher_name(int teacher_id);
     List<Map<String, Course>> getAllCourses();
-
     List<Map<String, Comment>> getComment(int course_id);
     List<Map<String, Evaluation>> getEvaluation(int course_id);
 

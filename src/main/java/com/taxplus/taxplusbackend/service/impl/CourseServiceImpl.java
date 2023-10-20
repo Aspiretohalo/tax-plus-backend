@@ -30,6 +30,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         return resultArray;
     }
 
+//    @Override
+//    public String getTeacher_name(int teacher_id) {
+//        return courseMapper.getTeacher_name(teacher_id);
+//    }
+
     @Override
     public List<Map<String, Course>> getAllCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
