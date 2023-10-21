@@ -16,18 +16,13 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements VideoService {
-
-
     @Autowired(required = false)
     private VideoMapper videoMapper;
 
-
-
-
-
-
-
-
+    @Override
+    public void setVideo(Video video) {
+        videoMapper.setVideo(video);
+    }
 
 
 }

@@ -15,9 +15,26 @@ public class Video {
 
     private long course_id;
 
-    private String video_url;
+    private String file_id;
+    private String psign;
+
     private String courseware_url;
 
+    public String getFile_id() {
+        return file_id;
+    }
+
+    public void setFile_id(String file_id) {
+        this.file_id = file_id;
+    }
+
+    public String getPsign() {
+        return psign;
+    }
+
+    public void setPsign(String psign) {
+        this.psign = psign;
+    }
 
     public String getCourseware_url() {
         return courseware_url;
@@ -51,11 +68,5 @@ public class Video {
         this.course_id = course_id;
     }
 
-    public String getVideo_url() {
-        return video_url;
-    }
 
-    public void setVideo_url(String video_url) {
-        this.video_url = video_url;
-    }
 }

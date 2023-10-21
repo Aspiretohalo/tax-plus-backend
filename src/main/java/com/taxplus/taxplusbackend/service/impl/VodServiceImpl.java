@@ -20,7 +20,6 @@ import java.io.InputStream;
 //@Slf4j
 @Service
 public class VodServiceImpl implements VodService {
-
     @Override
     public String uploadVideo(InputStream inputStream, String originalFilename) {
         System.out.println(inputStream);
