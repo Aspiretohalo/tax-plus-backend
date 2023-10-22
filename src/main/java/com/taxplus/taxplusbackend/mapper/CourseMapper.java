@@ -3,7 +3,6 @@ package com.taxplus.taxplusbackend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taxplus.taxplusbackend.domain.*;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT Courses.*, Teachers.teacher_name FROM CourseProgress JOIN Courses ON CourseProgress.course_id = Courses.course_id JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE CourseProgress.student_id = #{student_id};")
     List<Map<String, Course>> getCourses(int student_id);
 
-//    @Select(value = "SELECT teacher_name FROM Teachers WHERE teacher_id = #{teacher_id};")
-//    String getTeacher_name(int teacher_id);
+    @Select(value = "insert into courses (course_name,course_description,course_label,course_url,course_teacher,status,tag_type,choose_amount,course_begin_time) values(#{course_name},#{course_description},#{course_label},#{course_url},#{course_teacher},#{status},#{tag_type},#{choose_amount},#{course_begin_time})")
+    void setCourse(Course course);
 
     @Select(value = "SELECT * FROM Courses")
     List<Map<String, Course>> getAllCourses();
@@ -29,6 +28,6 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT * FROM Notices WHERE course_id = #{course_id};")
     List<Map<String, Notice>> getNotice(int course_id);
 
-    @Select(value = "SELECT * FROM Videos WHERE course_id = #{course_id};")
-    List<Map<String, Video>> getVideo(int course_id);
+    @Select(value = "SELECT * FROM Chapter WHERE course_id = #{course_id};")
+    List<Map<String, Chapter>> getChapter(int course_id);
 }

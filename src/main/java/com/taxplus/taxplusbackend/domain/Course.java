@@ -26,11 +26,19 @@ public class Course {
     private String tag_type;
 
     private int choose_amount;
+    private Date course_begin_time;
+
+    public Date getCourse_begin_time() {
+        return course_begin_time;
+    }
+
+    public void setCourse_begin_time(Date course_begin_time) {
+        this.course_begin_time = course_begin_time;
+    }
 
     public int getChoose_amount() {
         return choose_amount;
     }
-
     public void setChoose_amount(int choose_amount) {
         this.choose_amount = choose_amount;
     }

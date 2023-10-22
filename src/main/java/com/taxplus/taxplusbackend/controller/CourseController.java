@@ -3,7 +3,6 @@ package com.taxplus.taxplusbackend.controller;
 import com.taxplus.taxplusbackend.common.R;
 import com.taxplus.taxplusbackend.domain.*;
 import com.taxplus.taxplusbackend.service.CourseService;
-import com.taxplus.taxplusbackend.utils.JwtUtils;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +30,13 @@ public class CourseController {
         return list;
     }
 
-//    @PostMapping("/getTeacherName")
-//    public String getTeacher_name(@RequestParam("course_teacher") String course_teacher, ServletRequest request, ServletResponse response) {
-//        HttpServletRequest req = (HttpServletRequest) request;
-//
-//        String teacher_id;
-//        teacher_id = courseService.getTeacher_name(Integer.parseInt(course_teacher));
-//        return teacher_id;
-//    }
+    @PostMapping("/teacher/setCourse")
+    public R<Object> setCourse(@RequestBody Course course) {
+        courseService.setCourse(course);
+        log.info("存入新事项：{}", course.getCourse_name());
 
+        return R.success(null);
+    }
     /*获取所有课程*/
     @GetMapping("/getAllCourses")
     public List<Map<String, Course>> getAllCourses(ServletRequest request, ServletResponse response) {
@@ -89,13 +85,13 @@ public class CourseController {
         return list;
     }
 
-    //    获取某一门课程的评论video
-    @GetMapping("/course/getVideo")
-    public List<Map<String, Video>> getVideo(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
+    //    获取某一门课程的章节Chapter
+    @GetMapping("/course/getChapter")
+    public List<Map<String, Chapter>> getChapter(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
 
-        List<Map<String, Video>> list;
-        list = courseService.getVideo(Integer.parseInt(course_id));
+        List<Map<String, Chapter>> list;
+        list = courseService.getChapter(Integer.parseInt(course_id));
 
 
         return list;

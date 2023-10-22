@@ -2,11 +2,9 @@ package com.taxplus.taxplusbackend.domain;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Table(name = "videos")
 @Entity
-public class Video {
+public class Chapter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long video_id;
