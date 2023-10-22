@@ -13,7 +13,7 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT Courses.*, Teachers.teacher_name FROM CourseProgress JOIN Courses ON CourseProgress.course_id = Courses.course_id JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE CourseProgress.student_id = #{student_id};")
     List<Map<String, Course>> getCourses(int student_id);
 
-    @Select(value = "insert into courses (course_name,course_description,course_label,course_url,course_teacher,status,tag_type,choose_amount,course_begin_time) values(#{course_name},#{course_description},#{course_label},#{course_url},#{course_teacher},#{status},#{tag_type},#{choose_amount},#{course_begin_time})")
+    @Select(value = "insert into courses (course_name,course_description,course_label,course_teacher,course_url,status,tag_type,choose_amount,course_begin_time) values(#{course_name},#{course_description},#{course_label},#{course_teacher},#{course_url},#{status},#{tag_type},#{choose_amount},#{course_begin_time})")
     void setCourse(Course course);
 
     @Select(value = "SELECT * FROM Courses")

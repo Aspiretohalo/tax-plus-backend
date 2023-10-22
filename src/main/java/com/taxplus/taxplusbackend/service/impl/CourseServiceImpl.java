@@ -32,8 +32,16 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Override
     public void setCourse(Course course) {
+        course.setStatus("即将开始");
+        course.setTag_type("info");
+        course.setChoose_amount(0);
         courseMapper.setCourse(course);
     }
+
+//    public void setCover(String course_url) {
+//        courseMapper.setCover(course_url);
+//    }
+
     @Override
     public List<Map<String, Course>> getAllCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
@@ -96,7 +104,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
-
 
 
 }

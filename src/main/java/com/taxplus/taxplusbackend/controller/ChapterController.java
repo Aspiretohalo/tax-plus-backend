@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class ChapterController {
     @Autowired
     private ChapterService chapterService;
-
     @PostMapping("/teacher/setChapter")
     public R<Object> setChapter(@RequestBody Chapter chapter) {
         chapterService.setChapter(chapter);

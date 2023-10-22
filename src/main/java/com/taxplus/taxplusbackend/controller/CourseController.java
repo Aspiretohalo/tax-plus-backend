@@ -33,10 +33,11 @@ public class CourseController {
     @PostMapping("/teacher/setCourse")
     public R<Object> setCourse(@RequestBody Course course) {
         courseService.setCourse(course);
-        log.info("存入新事项：{}", course.getCourse_name());
+        log.info("存入新课程：{}", course.getCourse_name());
 
         return R.success(null);
     }
+
     /*获取所有课程*/
     @GetMapping("/getAllCourses")
     public List<Map<String, Course>> getAllCourses(ServletRequest request, ServletResponse response) {
