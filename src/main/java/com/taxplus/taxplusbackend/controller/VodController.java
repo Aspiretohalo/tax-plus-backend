@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,11 +35,11 @@ public class VodController {
 
         String fileId = vodService.uploadVideo(inputStream, originalFilename);
         String psign = PsignUtils.Psign(fileId);
-        Set<String> res = new HashSet<>();
-        res.add(psign);
+        ArrayList<String> res = new ArrayList<>();
         res.add(fileId);
+        res.add(psign);
         System.out.println(res);
-        return R.success(fileId);
+        return R.success(res);
     }
 
     //    删除视频接口

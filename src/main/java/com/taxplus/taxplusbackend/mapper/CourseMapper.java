@@ -30,4 +30,12 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "SELECT * FROM Chapter WHERE course_id = #{course_id};")
     List<Map<String, Chapter>> getChapter(int course_id);
+    @Select(value = "insert into comments (course_id,commentator,comment_text,comment_time,reply_to) values(#{course_id},#{commentator},#{comment_text},#{comment_time},#{reply_to})")
+    void setComment(Comment comment);
+
+    @Select(value = "insert into evaluations (course_id,evaluator,evaluation_stars,evaluation_text,evaluation_time) values(#{course_id},#{evaluator},#{evaluation_stars},#{evaluation_text},#{evaluation_time})")
+    void setEvaluation(Evaluation evaluation);
+
+    @Select(value = "insert into notices (course_id,announcer,notice_title,notice_text,notice_time) values(#{course_id},#{announcer},#{notice_title},#{notice_text},#{notice_time})")
+    void setNotice(Notice notice);
 }

@@ -23,4 +23,10 @@ public interface CourseService extends IService<Course> {
 
 
     void setCourse(Course course);
+
+    void setComment(Comment comment);
+
+    void setEvaluation(Evaluation evaluation);
+
+    void setNotice(Notice notice);
 }

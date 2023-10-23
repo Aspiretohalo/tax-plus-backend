@@ -62,6 +62,14 @@ public class CourseController {
         return list;
     }
 
+    @PostMapping("/course/setComment")
+    public R<Object> setComment(@RequestBody Comment comment) {
+        courseService.setComment(comment);
+        log.info("存入新事项：{}", comment.getComment_text());
+
+        return R.success(null);
+    }
+
     //    获取某一门课程的评论Evaluation
     @GetMapping("/course/getEvaluation")
     public List<Map<String, Evaluation>> getEvaluation(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
@@ -72,6 +80,14 @@ public class CourseController {
 
 
         return list;
+    }
+
+    @PostMapping("/course/setEvaluation")
+    public R<Object> setEvaluation(@RequestBody Evaluation evaluation) {
+        courseService.setEvaluation(evaluation);
+        log.info("存入新事项：{}", evaluation.getEvaluation_text());
+
+        return R.success(null);
     }
 
     //    获取某一门课程的评论Notice
@@ -86,6 +102,14 @@ public class CourseController {
         return list;
     }
 
+    @PostMapping("/course/setNotice")
+    public R<Object> setNotice(@RequestBody Notice notice) {
+        courseService.setNotice(notice);
+        log.info("存入新事项：{}", notice.getNotice_title());
+
+        return R.success(null);
+    }
+
     //    获取某一门课程的章节Chapter
     @GetMapping("/course/getChapter")
     public List<Map<String, Chapter>> getChapter(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
@@ -97,6 +121,4 @@ public class CourseController {
 
         return list;
     }
-
-
 }

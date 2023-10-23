@@ -38,9 +38,20 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseMapper.setCourse(course);
     }
 
-//    public void setCover(String course_url) {
-//        courseMapper.setCover(course_url);
-//    }
+    @Override
+    public void setComment(Comment comment) {
+        courseMapper.setComment(comment);
+    }
+
+    @Override
+    public void setEvaluation(Evaluation evaluation) {
+        courseMapper.setEvaluation(evaluation);
+    }
+
+    @Override
+    public void setNotice(Notice notice) {
+        courseMapper.setNotice(notice);
+    }
 
     @Override
     public List<Map<String, Course>> getAllCourses() {
