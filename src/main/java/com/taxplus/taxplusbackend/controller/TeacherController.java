@@ -19,7 +19,8 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping
+@CrossOrigin(origins = {"http://localhost:5173"})
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
@@ -42,6 +43,7 @@ public class TeacherController {
 
         String jwt = JwtUtils.generateJwt(claims);
         aUser.setJwt(jwt);
+        log.info(jwt);
 
         return R.success(aUser);
 
@@ -62,12 +64,10 @@ public class TeacherController {
         if (jwt2.length == 1) {
             log.info("JWT" + jwt);
             claims2 = JwtUtils.parseJWT(jwt);
-
 //        通过phoneNum来获取数据
             aUser = teacherService.getInfo((String) claims2.get("phone_number"));
         } else {
             log.info("JWT" + jwt2[1]);
-
             claims2 = JwtUtils.parseJWT(jwt2[1]);
             aUser = teacherService.getInfo((String) claims2.get("phone_number"));
         }

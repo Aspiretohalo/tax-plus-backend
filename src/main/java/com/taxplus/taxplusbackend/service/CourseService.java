@@ -29,4 +29,6 @@ public interface CourseService extends IService<Course> {
     void setEvaluation(Evaluation evaluation);
 
     void setNotice(Notice notice);
+
+    List<Map<String, Course>> getTeacherCourses(int teacher_id);
 }

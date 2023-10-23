@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class JwtUtils {
 
-    private static final String signKey = "abcabcabcabcbacbacacbabcbaaaaaaaaaaaaaaaaaaa";//key要足够长才满足其安全条件
+    private static final String signKey = "xzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxz";//key要足够长才满足其安全条件
     private static final Long expire = 43200000L;
 
     /**

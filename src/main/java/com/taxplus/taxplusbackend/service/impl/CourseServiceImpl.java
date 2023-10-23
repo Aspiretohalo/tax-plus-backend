@@ -31,6 +31,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
+    public List<Map<String, Course>> getTeacherCourses(int teacher_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getTeacherCourses(teacher_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
     public void setCourse(Course course) {
         course.setStatus("即将开始");
         course.setTag_type("info");
@@ -52,6 +65,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     public void setNotice(Notice notice) {
         courseMapper.setNotice(notice);
     }
+
 
     @Override
     public List<Map<String, Course>> getAllCourses() {
