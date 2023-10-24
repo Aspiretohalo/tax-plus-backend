@@ -18,6 +18,16 @@ public class Chapter {
 
     private String courseware_url;
 
+    private int chapter_index;
+
+    public int getChapter_index() {
+        return chapter_index;
+    }
+
+    public void setChapter_index(int chapter_index) {
+        this.chapter_index = chapter_index;
+    }
+
     public String getFile_id() {
         return file_id;
     }
