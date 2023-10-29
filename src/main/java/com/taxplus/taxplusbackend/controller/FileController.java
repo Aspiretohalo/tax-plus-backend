@@ -29,6 +29,7 @@ public class FileController {
     public R<String> uploadData(MultipartFile file) throws IOException {
 
         log.info("文件上传:{}", file.getOriginalFilename());
+
         String url = tcCOSUtils.upload(file);
         log.info("文件上传完成，文件访问的url:{}", url);
 

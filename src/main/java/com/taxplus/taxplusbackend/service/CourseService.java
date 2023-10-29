@@ -31,4 +31,8 @@ public interface CourseService extends IService<Course> {
     void setNotice(Notice notice);
 
     List<Map<String, Course>> getTeacherCourses(int teacher_id);
+
+    List<Map<String, FileData>> getFileData(int parseInt);
+
+    void setFileData(FileData fileData);
 }

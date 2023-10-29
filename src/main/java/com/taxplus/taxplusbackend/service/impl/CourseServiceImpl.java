@@ -66,6 +66,10 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseMapper.setNotice(notice);
     }
 
+    @Override
+    public void setFileData(FileData fileData) {
+        courseMapper.setFileData(fileData);
+    }
 
     @Override
     public List<Map<String, Course>> getAllCourses() {
@@ -116,6 +120,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
+    @Override
+    public List<Map<String, FileData>> getFileData(int course_id) {
+        List<Map<String, FileData>> resultArray = courseMapper.getFileData(course_id);
+
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
 
     @Override
     public List<Map<String, Chapter>> getChapter(int course_id) {

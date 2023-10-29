@@ -14,6 +14,16 @@ public class FileData {
     private int file_size;
     private int course_id;
 
+    private String file_url;
+
+    public String getFile_url() {
+        return file_url;
+    }
+
+    public void setFile_url(String file_url) {
+        this.file_url = file_url;
+    }
+
     public long getData_id() {
         return data_id;
     }
