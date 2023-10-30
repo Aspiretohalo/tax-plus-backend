@@ -41,6 +41,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         s.setStudent_name(result.getStudent_name());
         s.setGender(result.getGender());
         s.setAvatar(result.getAvatar());
+        s.setEmail(result.getEmail());
         // 返回新User对象
         return s;
     }

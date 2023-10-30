@@ -41,6 +41,7 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         t.setTeacher_name(result.getTeacher_name());
         t.setGender(result.getGender());
         t.setAvatar(result.getAvatar());
+        t.setEmail(result.getEmail());
         // 返回新User对象
         return t;
     }
