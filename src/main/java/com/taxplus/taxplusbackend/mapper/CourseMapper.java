@@ -25,7 +25,7 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT * FROM Comments WHERE course_id = #{course_id};")
     List<Map<String, Comment>> getComment(int course_id);
 
-    @Select(value = "SELECT * FROM Evaluations WHERE course_id = #{course_id};")
+    @Select(value = "SELECT evaluations.*, (SELECT ROUND(AVG(evaluation_stars), 1) FROM evaluations WHERE course_id = #{course_id}) as average_stars FROM evaluations WHERE course_id = #{course_id}")
     List<Map<String, Evaluation>> getEvaluation(int course_id);
 
     @Select(value = "SELECT * FROM Notices WHERE course_id = #{course_id};")
