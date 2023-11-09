@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseService extends IService<Course> {
+    List<Map<String, Course>> getAllLivingCourses();
 
     List<Map<String, Course>> getCourses(int student_id);
+
+    List<Map<String, Course>> getCourseByCourseId(int course_id);
 
     //    String getTeacher_name(int teacher_id);
     List<Map<String, Course>> getAllCourses();
@@ -20,7 +23,6 @@ public interface CourseService extends IService<Course> {
     List<Map<String, Notice>> getNotice(int course_id);
 
     List<Map<String, Chapter>> getChapter(int course_id);
-
 
     void setCourse(Course course);
 

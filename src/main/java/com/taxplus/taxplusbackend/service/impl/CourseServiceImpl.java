@@ -31,6 +31,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
+    public List<Map<String, Course>> getCourseByCourseId(int course_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getCourseByCourseId(course_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
     public List<Map<String, Course>> getTeacherCourses(int teacher_id) {
         List<Map<String, Course>> resultArray = courseMapper.getTeacherCourses(teacher_id);
 
@@ -71,6 +84,16 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseMapper.setFileData(fileData);
     }
 
+    @Override
+    public List<Map<String, Course>> getAllLivingCourses() {
+        List<Map<String, Course>> resultArray = courseMapper.getAllLivingCourses();
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
     @Override
     public List<Map<String, Course>> getAllCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();

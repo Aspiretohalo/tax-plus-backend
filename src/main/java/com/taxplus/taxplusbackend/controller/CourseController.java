@@ -20,6 +20,17 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    //获取所有课程
+    @GetMapping("/getAllLivingCourses")
+    public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getAllLivingCourses();
+
+        return list;
+    }
+
     //获取某个用户的课程
     @GetMapping("/getCourses")
     public List<Map<String, Course>> getCourses(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
@@ -29,6 +40,16 @@ public class CourseController {
         list = courseService.getCourses(Integer.parseInt(student_id));
         return list;
     }
+
+    @GetMapping("/getCourseByCourseId")
+    public List<Map<String, Course>> getCourseByCourseId(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getCourseByCourseId(Integer.parseInt(course_id));
+        return list;
+    }
+
 
     //获取某个用户的课程
     @GetMapping("/getTeacherCourses")
