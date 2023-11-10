@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseService extends IService<Course> {
+    List<Map<String, Course>> hasSelected(int course_id, int student_id);
     List<Map<String, Course>> getAllLivingCourses();
 
     List<Map<String, Course>> getCourses(int student_id);

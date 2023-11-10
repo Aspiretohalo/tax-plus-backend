@@ -18,6 +18,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     private CourseMapper courseMapper;
 
     @Override
+    public List<Map<String, Course>> hasSelected(int course_id, int student_id) {
+        List<Map<String, Course>> resultArray = courseMapper.hasSelected(course_id, student_id);
+
+        if (resultArray == null) {
+//            "请求的数据不存在"
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
     public List<Map<String, Course>> getCourses(int student_id) {
         List<Map<String, Course>> resultArray = courseMapper.getCourses(student_id);
 
@@ -94,6 +107,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public List<Map<String, Course>> getAllCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
