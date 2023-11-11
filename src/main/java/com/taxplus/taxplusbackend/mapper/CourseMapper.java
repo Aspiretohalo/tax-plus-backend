@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseMapper extends BaseMapper<Course> {
+    @Select(value = "insert into living_courses (meeting_id,course_id,living_course_name,living_course_description,course_teacher) values (#{meeting_id},#{course_id},#{living_course_name},#{living_course_description},#{course_teacher})")
+    void addMeetingId(LivingCourse livingCourse);
+
     @Select(value = "SELECT * FROM courseprogress WHERE course_id = #{course_id} AND student_id = #{student_id};")
     List<Map<String, Course>> hasSelected(int course_id, int student_id);
 
@@ -26,9 +29,10 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "SELECT courses.*, teachers.teacher_name FROM courses JOIN teachers ON courses.course_teacher = teachers.teacher_id;")
     List<Map<String, Course>> getAllCourses();
-
-    @Select(value = "SELECT living_courses.*, teachers.teacher_name FROM courses JOIN teachers ON courses.course_teacher = teachers.teacher_id;")
+    @Select(value = "SELECT living_courses.*,courses.course_name AS course_name, teachers.teacher_name,teachers.avatar FROM living_courses JOIN teachers ON living_courses.course_teacher = teachers.teacher_id JOIN courses ON living_courses.course_id = courses.course_id;")
     List<Map<String, Course>> getAllLivingCourses();
+    @Select(value = "SELECT living_courses.*, teachers.teacher_name FROM living_courses JOIN teachers ON living_courses.course_teacher = teachers.teacher_id WHERE living_courses.course_id =#{course_id};")
+    List<Map<String, Course>> getLivingNotice(int course_id);
 
     @Select(value = "SELECT comments.*, students.student_name FROM Comments JOIN students ON comments.commentator = students.student_id WHERE comments.course_id = #{course_id};")
     List<Map<String, Comment>> getComment(int course_id);

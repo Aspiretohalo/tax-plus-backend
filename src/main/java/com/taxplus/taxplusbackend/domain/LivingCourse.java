@@ -12,6 +12,15 @@ public class LivingCourse {
     private String living_course_name;
     private String living_course_description;
     private int course_teacher;
+    private String meeting_id;
+
+    public String getMeeting_id() {
+        return meeting_id;
+    }
+
+    public void setMeeting_id(String meeting_id) {
+        this.meeting_id = meeting_id;
+    }
 
     public long getLiving_course_id() {
         return living_course_id;

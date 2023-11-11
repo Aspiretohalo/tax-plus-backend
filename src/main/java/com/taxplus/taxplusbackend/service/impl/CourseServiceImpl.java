@@ -16,7 +16,10 @@ import java.util.Map;
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
     @Autowired(required = false)
     private CourseMapper courseMapper;
-
+    @Override
+    public void addMeetingId(LivingCourse livingCourse){
+      courseMapper.addMeetingId(livingCourse);
+    }
     @Override
     public List<Map<String, Course>> hasSelected(int course_id, int student_id) {
         List<Map<String, Course>> resultArray = courseMapper.hasSelected(course_id, student_id);
@@ -98,8 +101,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
-    public List<Map<String, Course>> getAllLivingCourses() {
-        List<Map<String, Course>> resultArray = courseMapper.getAllLivingCourses();
+    public List<Map<String, Course>> getLivingNotice(int course_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getLivingNotice(course_id);
         if (resultArray == null) {
             return null;
         }
@@ -107,10 +110,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
-
     @Override
     public List<Map<String, Course>> getAllCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+    @Override
+    public List<Map<String, Course>> getAllLivingCourses() {
+        List<Map<String, Course>> resultArray = courseMapper.getAllLivingCourses();
         if (resultArray == null) {
             return null;
         }

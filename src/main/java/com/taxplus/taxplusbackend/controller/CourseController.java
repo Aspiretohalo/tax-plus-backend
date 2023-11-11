@@ -20,17 +20,33 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    //获取所有课程
-    @GetMapping("/getAllLivingCourses")
-    public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, ServletResponse response) {
+    @PostMapping("/addMeetingId")
+    public R<Object> addMeetingId(@RequestBody LivingCourse livingCourse) {
+        courseService.addMeetingId(livingCourse);
+        log.info("存入新事项：{}", livingCourse.getMeeting_id());
+        return R.success(null);
+    }
+
+    //获取所有直播课程
+    @GetMapping("/getLivingNotice")
+    public List<Map<String, Course>> getLivingNotice(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
 
         List<Map<String, Course>> list;
-        list = courseService.getAllLivingCourses();
+        list = courseService.getLivingNotice(Integer.parseInt(course_id));
 
         return list;
     }
+//    getAllLivingCourses
+@GetMapping("/getAllLivingCourses")
+public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, ServletResponse response) {
+    HttpServletRequest req = (HttpServletRequest) request;
 
+    List<Map<String, Course>> list;
+    list = courseService.getAllLivingCourses();
+
+    return list;
+}
     //获取某个用户的课程
     @GetMapping("/getCourses")
     public List<Map<String, Course>> getCourses(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
