@@ -1,7 +1,6 @@
 package com.taxplus.taxplusbackend.controller;
 
 import com.taxplus.taxplusbackend.common.R;
-import com.taxplus.taxplusbackend.domain.Comment;
 import com.taxplus.taxplusbackend.domain.Discussion;
 import com.taxplus.taxplusbackend.domain.SubDiscussion;
 import com.taxplus.taxplusbackend.service.DiscussionService;

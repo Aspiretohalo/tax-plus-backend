@@ -19,7 +19,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping
-@CrossOrigin(origins = {"http://localhost:5173"})
+//@CrossOrigin(origins = {"http://localhost:5173"})
 public class StudentController {
     @Autowired
     private StudentService studentService;

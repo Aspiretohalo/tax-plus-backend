@@ -9,7 +9,33 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseMapper extends BaseMapper<Course> {
-    @Select(value = "insert into living_courses (meeting_id,course_id,living_course_name,living_course_description,course_teacher) values (#{meeting_id},#{course_id},#{living_course_name},#{living_course_description},#{course_teacher})")
+    @Select(value = "SELECT courseprogress.*, students.student_name from courseprogress JOIN students ON courseprogress.student_id = students.student_id where course_id=#{course_id};")
+    List<Map<String, Course>> getAllCourseLearningProgress(int course_id);
+    @Select(value = "SELECT COUNT(*) AS subDiscussion_count FROM sub_discussion WHERE commentator = #{commentator};")
+    List<Map<String, Course>> getSubDiscussionNumber(int commentator);
+
+    @Select(value = "SELECT COUNT(*) AS discussion_count FROM discussion WHERE commentator = #{commentator};")
+    List<Map<String, Course>> getDiscussionNumber(int commentator);
+
+    @Select(value = "SELECT COUNT(*) AS evaluation_count FROM evaluations WHERE evaluator = #{evaluator} AND course_id = #{course_id};")
+    List<Map<String, Course>> getEvaluationNumber(int course_id, int evaluator);
+
+    @Select(value = "SELECT * FROM courseprogress WHERE course_id = #{course_id} AND student_id = #{student_id};")
+    List<Map<String, Course>> getCourseLearningProgress(int course_id, int student_id);
+
+    @Select(value = "UPDATE courseprogress SET confirmation_time = (confirmation_time + #{confirmation_time})/2 WHERE course_id = #{course_id} AND student_id = #{student_id};")
+    void setConfirmationTime(CourseProgress courseProgress);
+
+    @Select(value = "UPDATE courseprogress SET course_learning_progress = course_learning_progress + #{course_learning_progress} WHERE course_id = #{course_id} AND student_id = #{student_id};")
+    void setCourseLearningProgress(CourseProgress courseProgress);
+
+    @Select(value = "insert into courseprogress (course_id,student_id) values (#{course_id},#{student_id})")
+    void selectTheCourse(CourseProgress courseProgress);
+
+    @Select(value = "insert into living_courses (course_id,living_course_name,course_teacher) values (#{course_id},#{living_course_name},#{course_teacher})")
+    void createNewLiving(LivingCourse livingCourse);
+
+    @Select(value = "update living_courses set meeting_id=#{meeting_id},course_id=#{course_id},living_course_name=#{living_course_name},living_course_description=#{living_course_description},course_teacher=#{course_teacher} where living_course_id=#{living_course_id}")
     void addMeetingId(LivingCourse livingCourse);
 
     @Select(value = "SELECT * FROM courseprogress WHERE course_id = #{course_id} AND student_id = #{student_id};")
@@ -29,15 +55,14 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "SELECT courses.*, teachers.teacher_name FROM courses JOIN teachers ON courses.course_teacher = teachers.teacher_id;")
     List<Map<String, Course>> getAllCourses();
+
     @Select(value = "SELECT living_courses.*,courses.course_name AS course_name, teachers.teacher_name,teachers.avatar FROM living_courses JOIN teachers ON living_courses.course_teacher = teachers.teacher_id JOIN courses ON living_courses.course_id = courses.course_id;")
     List<Map<String, Course>> getAllLivingCourses();
+
     @Select(value = "SELECT living_courses.*, teachers.teacher_name FROM living_courses JOIN teachers ON living_courses.course_teacher = teachers.teacher_id WHERE living_courses.course_id =#{course_id};")
     List<Map<String, Course>> getLivingNotice(int course_id);
 
-    @Select(value = "SELECT comments.*, students.student_name FROM Comments JOIN students ON comments.commentator = students.student_id WHERE comments.course_id = #{course_id};")
-    List<Map<String, Comment>> getComment(int course_id);
-
-    @Select(value = "SELECT evaluations.*,   (SELECT ROUND(AVG(evaluation_stars), 1) FROM evaluations WHERE course_id = #{course_id}) as average_stars,  students.student_name,   students.avatar FROM evaluations JOIN students ON evaluations.evaluator = students.student_id WHERE evaluations.course_id = #{course_id};")
+    @Select(value = "SELECT evaluations.*, (SELECT ROUND(AVG(evaluation_stars), 1) FROM evaluations WHERE course_id = #{course_id}) as average_stars,  students.student_name,   students.avatar FROM evaluations JOIN students ON evaluations.evaluator = students.student_id WHERE evaluations.course_id = #{course_id};")
     List<Map<String, Evaluation>> getEvaluation(int course_id);
 
     @Select(value = "SELECT notices.*,teachers.teacher_name FROM Notices JOIN teachers ON Notices.announcer = teachers.teacher_id WHERE Notices.course_id = #{course_id};")
@@ -48,9 +73,6 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "SELECT * FROM Chapter WHERE course_id = #{course_id};")
     List<Map<String, Chapter>> getChapter(int course_id);
-
-    @Select(value = "insert into comments (course_id,commentator,comment_text,comment_time,reply_to) values(#{course_id},#{commentator},#{comment_text},#{comment_time},#{reply_to})")
-    void setComment(Comment comment);
 
     @Select(value = "insert into evaluations (course_id,evaluator,evaluation_stars,evaluation_text,evaluation_time) values(#{course_id},#{evaluator},#{evaluation_stars},#{evaluation_text},#{evaluation_time})")
     void setEvaluation(Evaluation evaluation);

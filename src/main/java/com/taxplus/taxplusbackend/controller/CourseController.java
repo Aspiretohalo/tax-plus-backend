@@ -20,7 +20,99 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @PostMapping("/addMeetingId")
+    @GetMapping("/getAllCourseLearningProgress")
+    public List<Map<String, Course>> getAllCourseLearningProgress(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getAllCourseLearningProgress(Integer.parseInt(course_id));
+
+        return list;
+    }
+
+    @GetMapping("/getSubDiscussionNumber")
+    public List<Map<String, Course>> getSubDiscussionNumber(@RequestParam("commentator") String commentator, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getSubDiscussionNumber(Integer.parseInt(commentator));
+
+        return list;
+    }
+
+    @GetMapping("/getDiscussionNumber")
+    public List<Map<String, Course>> getDiscussionNumber(@RequestParam("commentator") String commentator, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getDiscussionNumber(Integer.parseInt(commentator));
+
+        return list;
+    }
+
+    @GetMapping("/getEvaluationNumber")
+    public List<Map<String, Course>> getEvaluationNumber(@RequestParam("course_id") String course_id, @RequestParam("evaluator") String evaluator, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getEvaluationNumber(Integer.parseInt(course_id), Integer.parseInt(evaluator));
+
+        return list;
+    }
+
+    @GetMapping("/getCourseLearningProgress")
+    public List<Map<String, Course>> getCourseLearningProgress(@RequestParam("course_id") String course_id, @RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getCourseLearningProgress(Integer.parseInt(course_id), Integer.parseInt(student_id));
+
+        return list;
+    }
+
+    @PostMapping("/setConfirmationTime")
+    public R<Object> setConfirmationTime(@RequestBody CourseProgress courseProgress) {
+        courseService.setConfirmationTime(courseProgress);
+        log.info("存入：{}", courseProgress.getConfirmation_time());
+
+        return R.success(null);
+    }
+
+    @PostMapping("/setCourseLearningProgress")
+    public R<Object> setCourseLearningProgress(@RequestBody CourseProgress courseProgress) {
+        courseService.setCourseLearningProgress(courseProgress);
+        log.info("存入：{}", courseProgress.getCourse_learning_progress());
+
+        return R.success(null);
+    }
+
+    @PostMapping("/selectTheCourse")
+    public R<Object> selectTheCourse(@RequestBody CourseProgress courseProgress) {
+        courseService.selectTheCourse(courseProgress);
+        log.info("存入：{}", courseProgress.getCourse_id());
+
+        return R.success(null);
+    }
+
+    @GetMapping("/judgeSelected")
+    public List<Map<String, Course>> JudgeSelected(@RequestParam("course_id") String course_id, @RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.hasSelected(Integer.parseInt(course_id), Integer.parseInt(student_id));
+
+        return list;
+    }
+
+    @PostMapping("/createNewLiving")
+    public R<Object> createNewLiving(@RequestBody LivingCourse livingCourse) {
+        courseService.createNewLiving(livingCourse);
+        log.info("存入新课程：{}", livingCourse.getLiving_course_name());
+
+        return R.success(null);
+    }
+
+    @PutMapping("/addMeetingId")
     public R<Object> addMeetingId(@RequestBody LivingCourse livingCourse) {
         courseService.addMeetingId(livingCourse);
         log.info("存入新事项：{}", livingCourse.getMeeting_id());
@@ -37,16 +129,18 @@ public class CourseController {
 
         return list;
     }
-//    getAllLivingCourses
-@GetMapping("/getAllLivingCourses")
-public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, ServletResponse response) {
-    HttpServletRequest req = (HttpServletRequest) request;
 
-    List<Map<String, Course>> list;
-    list = courseService.getAllLivingCourses();
+    //    getAllLivingCourses
+    @GetMapping("/getAllLivingCourses")
+    public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
 
-    return list;
-}
+        List<Map<String, Course>> list;
+        list = courseService.getAllLivingCourses();
+
+        return list;
+    }
+
     //获取某个用户的课程
     @GetMapping("/getCourses")
     public List<Map<String, Course>> getCourses(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
@@ -65,7 +159,6 @@ public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, Ser
         list = courseService.getCourseByCourseId(Integer.parseInt(course_id));
         return list;
     }
-
 
     //获取某个用户的课程
     @GetMapping("/getTeacherCourses")
@@ -96,24 +189,24 @@ public List<Map<String, Course>> getAllLivingCourses(ServletRequest request, Ser
         return list;
     }
 
-    //    获取某一门课程的评论comment
-    @GetMapping("/course/getComment")
-    public List<Map<String, Comment>> getComment(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
-        HttpServletRequest req = (HttpServletRequest) request;
-
-        List<Map<String, Comment>> list;
-        list = courseService.getComment(Integer.parseInt(course_id));
-
-        return list;
-    }
-
-    @PostMapping("/course/setComment")
-    public R<Object> setComment(@RequestBody Comment comment) {
-        courseService.setComment(comment);
-        log.info("存入新事项：{}", comment.getComment_text());
-
-        return R.success(null);
-    }
+//    //    获取某一门课程的评论comment
+//    @GetMapping("/course/getComment")
+//    public List<Map<String, Comment>> getComment(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
+//        HttpServletRequest req = (HttpServletRequest) request;
+//
+//        List<Map<String, Comment>> list;
+//        list = courseService.getComment(Integer.parseInt(course_id));
+//
+//        return list;
+//    }
+//
+//    @PostMapping("/course/setComment")
+//    public R<Object> setComment(@RequestBody Comment comment) {
+//        courseService.setComment(comment);
+//        log.info("存入新事项：{}", comment.getComment_text());
+//
+//        return R.success(null);
+//    }
 
     //    获取某一门课程的评论Evaluation
     @GetMapping("/course/getEvaluation")

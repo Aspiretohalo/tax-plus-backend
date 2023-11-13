@@ -19,6 +19,15 @@ public class Chapter {
     private String courseware_url;
 
     private int chapter_index;
+    private float last_watch_time;
+
+    public float getLast_watch_time() {
+        return last_watch_time;
+    }
+
+    public void setLast_watch_time(float last_watch_time) {
+        this.last_watch_time = last_watch_time;
+    }
 
     public int getChapter_index() {
         return chapter_index;

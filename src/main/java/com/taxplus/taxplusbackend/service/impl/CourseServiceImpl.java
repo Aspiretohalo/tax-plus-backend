@@ -17,9 +17,84 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Autowired(required = false)
     private CourseMapper courseMapper;
     @Override
-    public void addMeetingId(LivingCourse livingCourse){
-      courseMapper.addMeetingId(livingCourse);
+    public List<Map<String, Course>> getAllCourseLearningProgress(int course_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getAllCourseLearningProgress(course_id);
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
     }
+    @Override
+    public List<Map<String, Course>> getSubDiscussionNumber(int commentator) {
+        List<Map<String, Course>> resultArray = courseMapper.getSubDiscussionNumber(commentator);
+
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+    @Override
+    public List<Map<String, Course>> getDiscussionNumber(int commentator) {
+        List<Map<String, Course>> resultArray = courseMapper.getDiscussionNumber(commentator);
+
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+    @Override
+    public List<Map<String, Course>> getEvaluationNumber(int course_id, int evaluator) {
+        List<Map<String, Course>> resultArray = courseMapper.getEvaluationNumber(course_id, evaluator);
+
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
+    @Override
+    public List<Map<String, Course>> getCourseLearningProgress(int course_id, int student_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getCourseLearningProgress(course_id, student_id);
+
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+    @Override
+    public void setConfirmationTime(CourseProgress courseProgress) {
+        courseMapper.setConfirmationTime(courseProgress);
+    }
+    @Override
+    public void setCourseLearningProgress(CourseProgress courseProgress) {
+        courseMapper.setCourseLearningProgress(courseProgress);
+    }
+
+    @Override
+    public void selectTheCourse(CourseProgress courseProgress) {
+        courseMapper.selectTheCourse(courseProgress);
+    }
+
+    @Override
+    public void createNewLiving(LivingCourse livingCourse) {
+        courseMapper.createNewLiving(livingCourse);
+    }
+
+    @Override
+    public void addMeetingId(LivingCourse livingCourse) {
+        courseMapper.addMeetingId(livingCourse);
+    }
+
     @Override
     public List<Map<String, Course>> hasSelected(int course_id, int student_id) {
         List<Map<String, Course>> resultArray = courseMapper.hasSelected(course_id, student_id);
@@ -81,11 +156,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
-    public void setComment(Comment comment) {
-        courseMapper.setComment(comment);
-    }
-
-    @Override
     public void setEvaluation(Evaluation evaluation) {
         courseMapper.setEvaluation(evaluation);
     }
@@ -110,6 +180,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public List<Map<String, Course>> getAllCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
@@ -120,23 +191,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public List<Map<String, Course>> getAllLivingCourses() {
         List<Map<String, Course>> resultArray = courseMapper.getAllLivingCourses();
         if (resultArray == null) {
-            return null;
-        }
-        log.info(String.valueOf(resultArray));
-
-        return resultArray;
-    }
-
-    @Override
-    public List<Map<String, Comment>> getComment(int course_id) {
-        List<Map<String, Comment>> resultArray = courseMapper.getComment(course_id);
-
-        if (resultArray == null) {
-//            "请求的数据不存在"
             return null;
         }
         log.info(String.valueOf(resultArray));

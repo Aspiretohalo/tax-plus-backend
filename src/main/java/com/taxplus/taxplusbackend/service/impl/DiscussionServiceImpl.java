@@ -1,7 +1,6 @@
 package com.taxplus.taxplusbackend.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taxplus.taxplusbackend.domain.Comment;
 import com.taxplus.taxplusbackend.domain.Discussion;
 import com.taxplus.taxplusbackend.domain.SubDiscussion;
 import com.taxplus.taxplusbackend.mapper.DiscussionMapper;

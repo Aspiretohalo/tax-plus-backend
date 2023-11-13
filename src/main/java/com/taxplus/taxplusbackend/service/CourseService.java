@@ -10,6 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseService extends IService<Course> {
+    List<Map<String, Course>> getAllCourseLearningProgress(int course_id);
+    List<Map<String, Course>> getSubDiscussionNumber(int commentator);
+    List<Map<String, Course>> getDiscussionNumber(int commentator);
+    List<Map<String, Course>> getEvaluationNumber(int course_id, int evaluator);
+    List<Map<String, Course>> getCourseLearningProgress(int course_id, int student_id);
+
+    void setConfirmationTime(CourseProgress courseProgress);
+
+    void setCourseLearningProgress(CourseProgress courseProgress);
+
+    void selectTheCourse(CourseProgress courseProgress);
+
+    void createNewLiving(LivingCourse livingCourse);
 
     //    新增直播房间号
     void addMeetingId(LivingCourse livingCourse);
@@ -17,16 +30,14 @@ public interface CourseService extends IService<Course> {
     List<Map<String, Course>> hasSelected(int course_id, int student_id);
 
     List<Map<String, Course>> getLivingNotice(int course_id);
+
     List<Map<String, Course>> getAllLivingCourses();
 
     List<Map<String, Course>> getCourses(int student_id);
 
     List<Map<String, Course>> getCourseByCourseId(int course_id);
 
-    //    String getTeacher_name(int teacher_id);
     List<Map<String, Course>> getAllCourses();
-
-    List<Map<String, Comment>> getComment(int course_id);
 
     List<Map<String, Evaluation>> getEvaluation(int course_id);
 
@@ -35,8 +46,6 @@ public interface CourseService extends IService<Course> {
     List<Map<String, Chapter>> getChapter(int course_id);
 
     void setCourse(Course course);
-
-    void setComment(Comment comment);
 
     void setEvaluation(Evaluation evaluation);
 
