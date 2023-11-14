@@ -10,10 +10,17 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseService extends IService<Course> {
+    List<Map<String, Course>> getRecommendedCourse(int student_id);
+    List<Map<String, Course>> getCourseByStudentId(int student_id);
+
     List<Map<String, Course>> getAllCourseLearningProgress(int course_id);
+
     List<Map<String, Course>> getSubDiscussionNumber(int commentator);
+
     List<Map<String, Course>> getDiscussionNumber(int commentator);
+
     List<Map<String, Course>> getEvaluationNumber(int course_id, int evaluator);
+
     List<Map<String, Course>> getCourseLearningProgress(int course_id, int student_id);
 
     void setConfirmationTime(CourseProgress courseProgress);

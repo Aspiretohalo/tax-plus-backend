@@ -3,11 +3,12 @@ package com.taxplus.taxplusbackend.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taxplus.taxplusbackend.domain.Discussion;
 import com.taxplus.taxplusbackend.domain.SubDiscussion;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
-
+@Mapper
 public interface DiscussionMapper extends BaseMapper<Discussion> {
     @Select(value = "insert into discussion (commentator,commentator_type,post_text,post_time,image_url) values(#{commentator},#{commentator_type},#{post_text},#{post_time},#{image_url})")
     void setDiscussion(Discussion discussion);

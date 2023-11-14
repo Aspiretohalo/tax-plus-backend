@@ -3,19 +3,116 @@ package com.taxplus.taxplusbackend.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taxplus.taxplusbackend.domain.*;
 import com.taxplus.taxplusbackend.mapper.CourseMapper;
+import com.taxplus.taxplusbackend.mapper.StudentMapper;
 import com.taxplus.taxplusbackend.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static com.taxplus.taxplusbackend.utils.SimilarityBasedSort.calculateJaccardSimilarity;
 
 @Slf4j
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
-    @Autowired(required = false)
+    @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private StudentMapper studentMapper;
+
+    @Override
+    public List<Map<String, Course>> getRecommendedCourse(int student_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
+        if (resultArray == null) {
+            return null;
+        }
+
+//        拿到了course_label
+        List<String[]> courseLabelsList = new ArrayList<>();
+        for (Map<String, Course> courseMap : resultArray) {
+            String str = String.valueOf(courseMap.get("course_label"));
+            String[] courseLabel = str.substring(1).substring(0, str.length() - 2).split(",");
+            courseLabelsList.add(courseLabel);
+        }
+        log.info(Arrays.toString(courseLabelsList.get(0)));
+//        拿到了course_intendencies
+        String str1 = studentMapper.getCourseIntendencies(student_id);
+        String courseIntendencies = str1.substring(1).substring(0, str1.length() - 2);
+
+        String[] arr1 = courseIntendencies.split(","); // 假设课程兴趣是以逗号分隔的字符串
+
+        log.info("arr");
+        log.info(Arrays.toString(arr1));
+//        每一门课程的标签同课程偏好作比较
+        Map<String[], Double> similarityMap = new HashMap<>();
+        for (String[] arr : courseLabelsList) {
+            double similarity = calculateJaccardSimilarity(arr1, arr);
+            similarityMap.put(arr, similarity);
+        }
+
+        List<Map.Entry<String[], Double>> sortedList = new ArrayList<>(similarityMap.entrySet());
+        sortedList.sort((entry1, entry2) -> Double.compare(entry2.getValue(), entry1.getValue()));
+//        打印相似度
+        for (Map.Entry<String[], Double> entry : sortedList) {
+            System.out.println(Arrays.toString(entry.getKey()) + " - Similarity: " + entry.getValue());
+        }
+        // 创建新的列表，按照排序后的相似度顺序将相应的课程放入其中
+//        List<Map<String, Course>> sortedCourses = new ArrayList<>();
+//        for (Map.Entry<String[], Double> entry : sortedList) {
+//            // 获取相应的课程信息
+//            Map<String, Course> courseMap = getCourseByLabel(resultArray, entry.getKey());
+//            sortedCourses.add(courseMap);
+//        }
+
+        // 创建新的列表，选择排序完的前五个课程
+        List<Map<String, Course>> sortedCourses = new ArrayList<>();
+        int count = 0;
+        for (Map.Entry<String[], Double> entry : sortedList) {
+            // 获取相应的课程信息
+            Map<String, Course> courseMap = getCourseByLabel(resultArray, entry.getKey());
+            sortedCourses.add(courseMap);
+
+            // 限制只选择前五个课程
+            count++;
+            if (count >= 5) {
+                break;
+            }
+        }
+        // 输出排序后的课程
+        for (Map<String, Course> courseMap : sortedCourses) {
+            System.out.println("Course: " + courseMap);
+        }
+
+        log.info(sortedCourses.toString());
+        return sortedCourses;
+    }
+
+    // 辅助方法，根据标签获取对应的课程信息
+    private Map<String, Course> getCourseByLabel(List<Map<String, Course>> courses, String[] labels) {
+        for (Map<String, Course> courseMap : courses) {
+            String str = String.valueOf(courseMap.get("course_label"));
+            String[] courseLabels = str.substring(1).substring(0, str.length() - 2).split(",");
+
+            // 判断标签是否一致
+            if (Arrays.equals(courseLabels, labels)) {
+                return courseMap;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Course>> getCourseByStudentId(int student_id) {
+        List<Map<String, Course>> resultArray = courseMapper.getCourseByStudentId(student_id);
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
+
     @Override
     public List<Map<String, Course>> getAllCourseLearningProgress(int course_id) {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourseLearningProgress(course_id);
@@ -26,6 +123,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public List<Map<String, Course>> getSubDiscussionNumber(int commentator) {
         List<Map<String, Course>> resultArray = courseMapper.getSubDiscussionNumber(commentator);
@@ -37,6 +135,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public List<Map<String, Course>> getDiscussionNumber(int commentator) {
         List<Map<String, Course>> resultArray = courseMapper.getDiscussionNumber(commentator);
@@ -48,6 +147,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public List<Map<String, Course>> getEvaluationNumber(int course_id, int evaluator) {
         List<Map<String, Course>> resultArray = courseMapper.getEvaluationNumber(course_id, evaluator);
@@ -71,10 +171,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return resultArray;
     }
+
     @Override
     public void setConfirmationTime(CourseProgress courseProgress) {
         courseMapper.setConfirmationTime(courseProgress);
     }
+
     @Override
     public void setCourseLearningProgress(CourseProgress courseProgress) {
         courseMapper.setCourseLearningProgress(courseProgress);

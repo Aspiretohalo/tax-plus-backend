@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DiscussionServiceImpl extends ServiceImpl<DiscussionMapper, Discussion> implements DiscussionService {
-    @Autowired(required = false)
+    @Autowired
     private DiscussionMapper discussionMapper;
 
     @Override

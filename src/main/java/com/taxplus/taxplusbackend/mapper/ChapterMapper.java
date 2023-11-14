@@ -3,11 +3,12 @@ package com.taxplus.taxplusbackend.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taxplus.taxplusbackend.domain.Chapter;
 import com.taxplus.taxplusbackend.domain.Course;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
-
+@Mapper
 public interface ChapterMapper extends BaseMapper<Chapter>{
     @Select(value = "SELECT * FROM chapter WHERE chapter_index = #{chapter_index};")
     List<Map<String, Chapter>> getLastWatchedTime(int chapter_index);

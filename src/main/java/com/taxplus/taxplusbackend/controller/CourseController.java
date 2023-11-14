@@ -19,6 +19,24 @@ import java.util.Map;
 public class CourseController {
     @Autowired
     private CourseService courseService;
+    @GetMapping("/getRecommendedCourse")
+    public List<Map<String, Course>> getRecommendedCourse(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getRecommendedCourse(Integer.parseInt(student_id));
+
+        return list;
+    }
+    @GetMapping("/getCourseByStudentId")
+    public List<Map<String, Course>> getCourseByStudentId(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Course>> list;
+        list = courseService.getCourseByStudentId(Integer.parseInt(student_id));
+
+        return list;
+    }
 
     @GetMapping("/getAllCourseLearningProgress")
     public List<Map<String, Course>> getAllCourseLearningProgress(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {

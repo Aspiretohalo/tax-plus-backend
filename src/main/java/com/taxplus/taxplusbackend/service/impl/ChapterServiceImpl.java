@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> implements ChapterService {
-    @Autowired(required = false)
+    @Autowired
     private ChapterMapper chapterMapper;
 
     @Override

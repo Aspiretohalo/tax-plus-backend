@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface StudentMapper extends BaseMapper<Student> {
+    @Select(value = "SELECT course_intendencies FROM students WHERE student_id=#{student_id}")
+    String getCourseIntendencies(int student_id);
     @Select(value = "UPDATE students SET available_time=#{available_time},course_intendencies=#{course_intendencies} where  student_id = #{student_id}")
     void setCourseIntendencies(Student student);
 

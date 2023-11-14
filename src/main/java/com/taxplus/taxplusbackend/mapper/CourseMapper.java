@@ -3,12 +3,16 @@ package com.taxplus.taxplusbackend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taxplus.taxplusbackend.domain.*;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
-
+@Mapper
 public interface CourseMapper extends BaseMapper<Course> {
+
+    @Select(value = "SELECT cp.*, c.course_teacher,c.course_name,t.teacher_name FROM courseprogress cp JOIN courses c ON cp.course_id = c.course_id JOIN teachers t ON c.course_teacher=t.teacher_id WHERE cp.student_id = #{student_id};")
+    List<Map<String, Course>> getCourseByStudentId(int student_id);
     @Select(value = "SELECT courseprogress.*, students.student_name from courseprogress JOIN students ON courseprogress.student_id = students.student_id where course_id=#{course_id};")
     List<Map<String, Course>> getAllCourseLearningProgress(int course_id);
     @Select(value = "SELECT COUNT(*) AS subDiscussion_count FROM sub_discussion WHERE commentator = #{commentator};")
