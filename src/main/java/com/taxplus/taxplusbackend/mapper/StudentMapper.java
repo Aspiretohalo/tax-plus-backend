@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface StudentMapper extends BaseMapper<Student> {
+    @Select(value = "UPDATE students SET available_time=#{available_time},course_intendencies=#{course_intendencies} where  student_id = #{student_id}")
+    void setCourseIntendencies(Student student);
+
     @Select(value = "select * from students where phone_number=#{phone_number} and user_password = #{user_password}")
 //使用注解方式，也可用xml方式（编写.xml文件放在resources下且要在application.yml中配置localtion等）
     Student selectOneStudent(Student student);

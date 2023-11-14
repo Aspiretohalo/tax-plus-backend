@@ -14,6 +14,11 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Autowired
     private StudentMapper studentMapper;
 
+    @Override
+    public void setCourseIntendencies(Student student) {
+        studentMapper.setCourseIntendencies(student);
+    }
+
     //登录
     @Override
     public Student selectStudent(Student student) {

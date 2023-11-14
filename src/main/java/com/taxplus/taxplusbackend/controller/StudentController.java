@@ -2,6 +2,7 @@ package com.taxplus.taxplusbackend.controller;
 
 import com.taxplus.taxplusbackend.common.R;
 import com.taxplus.taxplusbackend.domain.Course;
+import com.taxplus.taxplusbackend.domain.CourseProgress;
 import com.taxplus.taxplusbackend.domain.Student;
 import com.taxplus.taxplusbackend.service.StudentService;
 import com.taxplus.taxplusbackend.utils.JwtUtils;
@@ -23,6 +24,15 @@ import java.util.Map;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    @PostMapping("/setCourseIntendencies")
+    public R<Object> setCourseIntendencies(@RequestBody Student student) {
+        log.info("存入：{}", student.getAvailable_time(), student.getCourse_intendencies());
+
+        studentService.setCourseIntendencies(student);
+
+        return R.success(null);
+    }
 
     //    接收前端发来的login请求
     @PostMapping("/student/login")
