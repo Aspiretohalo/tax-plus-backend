@@ -188,6 +188,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
+    public void setReplay(ReplayInfo replayInfo) {
+        courseMapper.setReplay(replayInfo);
+    }
+
+    @Override
     public void createNewLiving(LivingCourse livingCourse) {
         courseMapper.createNewLiving(livingCourse);
     }

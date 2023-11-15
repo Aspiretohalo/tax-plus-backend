@@ -29,6 +29,8 @@ public interface CourseService extends IService<Course> {
 
     void selectTheCourse(CourseProgress courseProgress);
 
+    void setReplay(ReplayInfo replayInfo);
+
     void createNewLiving(LivingCourse livingCourse);
 
     //    新增直播房间号

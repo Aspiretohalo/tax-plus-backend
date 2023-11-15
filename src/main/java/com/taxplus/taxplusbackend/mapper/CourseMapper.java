@@ -8,13 +8,16 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
+
 @Mapper
 public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "SELECT cp.*, c.course_teacher,c.course_name,t.teacher_name FROM courseprogress cp JOIN courses c ON cp.course_id = c.course_id JOIN teachers t ON c.course_teacher=t.teacher_id WHERE cp.student_id = #{student_id};")
     List<Map<String, Course>> getCourseByStudentId(int student_id);
+
     @Select(value = "SELECT courseprogress.*, students.student_name from courseprogress JOIN students ON courseprogress.student_id = students.student_id where course_id=#{course_id};")
     List<Map<String, Course>> getAllCourseLearningProgress(int course_id);
+
     @Select(value = "SELECT COUNT(*) AS subDiscussion_count FROM sub_discussion WHERE commentator = #{commentator};")
     List<Map<String, Course>> getSubDiscussionNumber(int commentator);
 
@@ -35,7 +38,8 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "insert into courseprogress (course_id,student_id) values (#{course_id},#{student_id})")
     void selectTheCourse(CourseProgress courseProgress);
-
+    @Select(value = "insert into replay_info (course_id,meeting_id) values (#{course_id},#{meeting_id})")
+    void setReplay(ReplayInfo replayInfo);
     @Select(value = "insert into living_courses (course_id,living_course_name,course_teacher) values (#{course_id},#{living_course_name},#{course_teacher})")
     void createNewLiving(LivingCourse livingCourse);
 

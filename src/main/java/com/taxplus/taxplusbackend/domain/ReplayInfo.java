@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Table(name = "replay_info")
 @Entity
-public class Replay_info {
+public class ReplayInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long replay_id;

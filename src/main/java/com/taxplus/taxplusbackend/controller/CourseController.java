@@ -19,6 +19,7 @@ import java.util.Map;
 public class CourseController {
     @Autowired
     private CourseService courseService;
+
     @GetMapping("/getRecommendedCourse")
     public List<Map<String, Course>> getRecommendedCourse(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
@@ -28,6 +29,7 @@ public class CourseController {
 
         return list;
     }
+
     @GetMapping("/getCourseByStudentId")
     public List<Map<String, Course>> getCourseByStudentId(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
@@ -122,10 +124,18 @@ public class CourseController {
         return list;
     }
 
+    @PostMapping("/setReplay")
+    public R<Object> setReplay(@RequestBody ReplayInfo replayInfo) {
+        courseService.setReplay(replayInfo);
+        log.info("存入：{}", replayInfo.getMeeting_id());
+
+        return R.success(null);
+    }
+
     @PostMapping("/createNewLiving")
     public R<Object> createNewLiving(@RequestBody LivingCourse livingCourse) {
         courseService.createNewLiving(livingCourse);
-        log.info("存入新课程：{}", livingCourse.getLiving_course_name());
+        log.info("存入：{}", livingCourse.getLiving_course_name());
 
         return R.success(null);
     }
