@@ -35,15 +35,15 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             String[] courseLabel = str.substring(1).substring(0, str.length() - 2).split(",");
             courseLabelsList.add(courseLabel);
         }
-        log.info(Arrays.toString(courseLabelsList.get(0)));
+//        log.info(Arrays.toString(courseLabelsList.get(0)));
 //        拿到了course_intendencies
         String str1 = studentMapper.getCourseIntendencies(student_id);
         String courseIntendencies = str1.substring(1).substring(0, str1.length() - 2);
 
         String[] arr1 = courseIntendencies.split(","); // 假设课程兴趣是以逗号分隔的字符串
 
-        log.info("arr");
-        log.info(Arrays.toString(arr1));
+//        log.info("arr");
+//        log.info(Arrays.toString(arr1));
 //        每一门课程的标签同课程偏好作比较
         Map<String[], Double> similarityMap = new HashMap<>();
         for (String[] arr : courseLabelsList) {
@@ -185,11 +185,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public void selectTheCourse(CourseProgress courseProgress) {
         courseMapper.selectTheCourse(courseProgress);
-    }
-
-    @Override
-    public void setReplay(ReplayInfo replayInfo) {
-        courseMapper.setReplay(replayInfo);
     }
 
     @Override

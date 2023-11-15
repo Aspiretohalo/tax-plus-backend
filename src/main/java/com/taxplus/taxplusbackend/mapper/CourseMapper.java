@@ -38,8 +38,7 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "insert into courseprogress (course_id,student_id) values (#{course_id},#{student_id})")
     void selectTheCourse(CourseProgress courseProgress);
-    @Select(value = "insert into replay_info (course_id,meeting_id) values (#{course_id},#{meeting_id})")
-    void setReplay(ReplayInfo replayInfo);
+
     @Select(value = "insert into living_courses (course_id,living_course_name,course_teacher) values (#{course_id},#{living_course_name},#{course_teacher})")
     void createNewLiving(LivingCourse livingCourse);
 

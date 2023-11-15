@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface CourseService extends IService<Course> {
     List<Map<String, Course>> getRecommendedCourse(int student_id);
+
     List<Map<String, Course>> getCourseByStudentId(int student_id);
 
     List<Map<String, Course>> getAllCourseLearningProgress(int course_id);
@@ -28,8 +29,6 @@ public interface CourseService extends IService<Course> {
     void setCourseLearningProgress(CourseProgress courseProgress);
 
     void selectTheCourse(CourseProgress courseProgress);
-
-    void setReplay(ReplayInfo replayInfo);
 
     void createNewLiving(LivingCourse livingCourse);
 

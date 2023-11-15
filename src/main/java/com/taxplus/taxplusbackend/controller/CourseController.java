@@ -124,14 +124,6 @@ public class CourseController {
         return list;
     }
 
-    @PostMapping("/setReplay")
-    public R<Object> setReplay(@RequestBody ReplayInfo replayInfo) {
-        courseService.setReplay(replayInfo);
-        log.info("存入：{}", replayInfo.getMeeting_id());
-
-        return R.success(null);
-    }
-
     @PostMapping("/createNewLiving")
     public R<Object> createNewLiving(@RequestBody LivingCourse livingCourse) {
         courseService.createNewLiving(livingCourse);
