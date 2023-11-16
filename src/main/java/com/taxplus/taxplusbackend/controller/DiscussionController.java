@@ -34,7 +34,8 @@ public class DiscussionController {
     @PostMapping("/setDiscussion")
     public R<Object> setDiscussion(@RequestBody Discussion discussion) {
         discussionService.setDiscussion(discussion);
-        log.info("存入新事项：{}", discussion.getPost_text());
+        log.info("存入：{}", discussion.getPost_text());
+        log.info("存入：{}", discussion.getPost_time());
 
         return R.success(null);
     }
