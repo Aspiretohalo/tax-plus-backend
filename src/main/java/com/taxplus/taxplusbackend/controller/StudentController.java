@@ -27,8 +27,10 @@ public class StudentController {
 
     @PostMapping("/setCourseIntendencies")
     public R<Object> setCourseIntendencies(@RequestBody Student student) {
-        log.info("存入：{}", student.getAvailable_time(), student.getCourse_intendencies());
-
+        log.info("存入：{}", student.getAvailable_time());
+        log.info("存入：{}", student.getCourse_intendencies());
+//        log.info();
+        System.out.println(student.getStudent_id());
         studentService.setCourseIntendencies(student);
 
         return R.success(null);

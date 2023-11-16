@@ -24,6 +24,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public List<Map<String, Course>> getRecommendedCourse(int student_id) {
         List<Map<String, Course>> resultArray = courseMapper.getAllCourses();
+
         if (resultArray == null) {
             return null;
         }

@@ -23,7 +23,7 @@ public class CourseController {
     @GetMapping("/getRecommendedCourse")
     public List<Map<String, Course>> getRecommendedCourse(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
-
+        log.info(student_id);
         List<Map<String, Course>> list;
         list = courseService.getRecommendedCourse(Integer.parseInt(student_id));
 
