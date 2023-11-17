@@ -2,6 +2,8 @@ package com.taxplus.taxplusbackend.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Table(name = "living_courses")
 @Entity
 public class LivingCourse {
@@ -13,6 +15,15 @@ public class LivingCourse {
     private String living_course_description;
     private int course_teacher;
     private String meeting_id;
+    private Date start_time;
+
+    public Date getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Date start_time) {
+        this.start_time = start_time;
+    }
 
     public String getMeeting_id() {
         return meeting_id;

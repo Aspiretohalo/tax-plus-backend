@@ -39,7 +39,7 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "insert into courseprogress (course_id,student_id) values (#{course_id},#{student_id})")
     void selectTheCourse(CourseProgress courseProgress);
 
-    @Select(value = "insert into living_courses (course_id,living_course_name,course_teacher) values (#{course_id},#{living_course_name},#{course_teacher})")
+    @Select(value = "insert into living_courses (course_id,living_course_name,course_teacher,start_time) values (#{course_id},#{living_course_name},#{course_teacher},#{start_time})")
     void createNewLiving(LivingCourse livingCourse);
 
     @Select(value = "update living_courses set meeting_id=#{meeting_id},course_id=#{course_id},living_course_name=#{living_course_name},living_course_description=#{living_course_description},course_teacher=#{course_teacher} where living_course_id=#{living_course_id}")
