@@ -25,6 +25,16 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @GetMapping("/getStudentMsgById")
+    public List<Map<String, Student>> getStudentMsgById(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Student>> list;
+        list = studentService.getStudentMsgById(Integer.parseInt(student_id));
+
+        return list;
+    }
+
     @PostMapping("/setCourseIntendencies")
     public R<Object> setCourseIntendencies(@RequestBody Student student) {
         log.info("存入：{}", student.getAvailable_time());

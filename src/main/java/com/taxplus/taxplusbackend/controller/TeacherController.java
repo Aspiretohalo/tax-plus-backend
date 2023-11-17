@@ -25,6 +25,15 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
+    @GetMapping("/getTeacherMsgById")
+    public List<Map<String, Teacher>> getTeacherMsgById(@RequestParam("teacher_id") String student_id, ServletRequest request, ServletResponse response) {
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        List<Map<String, Teacher>> list;
+        list = teacherService.getTeacherMsgById(Integer.parseInt(student_id));
+
+        return list;
+    }
     //    接收前端发来的login请求
     @PostMapping("/teacher/login")
     public R<Teacher> login(HttpServletRequest request, @RequestBody Teacher teacher) {

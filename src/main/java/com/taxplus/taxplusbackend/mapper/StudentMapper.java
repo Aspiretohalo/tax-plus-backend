@@ -5,10 +5,17 @@ import com.taxplus.taxplusbackend.domain.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface StudentMapper extends BaseMapper<Student> {
+    @Select(value = "SELECT * FROM students  WHERE student_id = #{student_id};")
+    List<Map<String, Student>> getStudentMsgById(int student_id);
+
     @Select(value = "SELECT course_intendencies FROM students WHERE student_id=#{student_id}")
     String getCourseIntendencies(int student_id);
+
     @Select(value = "UPDATE students SET available_time=#{available_time},course_intendencies=#{course_intendencies} where  student_id = #{student_id}")
     void setCourseIntendencies(Student student);
 
@@ -18,6 +25,4 @@ public interface StudentMapper extends BaseMapper<Student> {
 
     @Select(value = "SELECT * FROM students WHERE phone_number=#{phone_number}")
     Student findByPhone(String phone_number);
-
-
 }

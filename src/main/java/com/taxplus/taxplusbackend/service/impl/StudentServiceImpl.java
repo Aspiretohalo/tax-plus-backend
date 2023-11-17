@@ -1,6 +1,7 @@
 package com.taxplus.taxplusbackend.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taxplus.taxplusbackend.domain.Course;
 import com.taxplus.taxplusbackend.domain.Student;
 import com.taxplus.taxplusbackend.mapper.StudentMapper;
 import com.taxplus.taxplusbackend.service.StudentService;
@@ -8,11 +9,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
+
+    @Override
+    public List<Map<String, Student>> getStudentMsgById(int student_id) {
+        List<Map<String, Student>> resultArray = studentMapper.getStudentMsgById(student_id);
+        if (resultArray == null) {
+            return null;
+        }
+        log.info(String.valueOf(resultArray));
+
+        return resultArray;
+    }
 
     @Override
     public void setCourseIntendencies(Student student) {
