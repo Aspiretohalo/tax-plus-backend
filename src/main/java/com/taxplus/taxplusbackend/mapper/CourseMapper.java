@@ -57,7 +57,7 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT *,Teachers.teacher_name FROM courses JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE course_teacher = #{teacher_id};")
     List<Map<String, Course>> getTeacherCourses(int teacher_id);
 
-    @Select(value = "insert into courses (course_name,course_description,course_label,course_teacher,course_url,status,tag_type,choose_amount,course_begin_time) values(#{course_name},#{course_description},#{course_label},#{course_teacher},#{course_url},#{status},#{tag_type},#{choose_amount},#{course_begin_time})")
+    @Select(value = "insert into courses (course_name,course_description,course_label,course_teacher,course_url) values(#{course_name},#{course_description},#{course_label},#{course_teacher},#{course_url})")
     void setCourse(Course course);
 
     @Select(value = "SELECT courses.*, teachers.teacher_name FROM courses JOIN teachers ON courses.course_teacher = teachers.teacher_id;")
@@ -75,9 +75,6 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT notices.*,teachers.teacher_name FROM Notices JOIN teachers ON Notices.announcer = teachers.teacher_id WHERE Notices.course_id = #{course_id};")
     List<Map<String, Notice>> getNotice(int course_id);
 
-    @Select(value = "SELECT * FROM file_data WHERE course_id = #{course_id};")
-    List<Map<String, FileData>> getFileData(int course_id);
-
     @Select(value = "SELECT * FROM Chapter WHERE course_id = #{course_id};")
     List<Map<String, Chapter>> getChapter(int course_id);
 
@@ -86,8 +83,5 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     @Select(value = "insert into notices (course_id,announcer,notice_title,notice_text,notice_time) values(#{course_id},#{announcer},#{notice_title},#{notice_text},#{notice_time})")
     void setNotice(Notice notice);
-
-    @Select(value = "insert into file_data (course_id,file_name,file_type,file_size,file_url) values(#{course_id},#{file_name},#{file_type},#{file_size},#{file_url})")
-    void setFileData(FileData fileData);
 
 }

@@ -23,10 +23,11 @@ public class Student {
 
     private int gender;
     private String email;
-    private Date update_time;
+
     private float totalLearningTime;
     private String available_time;
     private String course_intendencies;
+    private int integral;
     public String jwt;
 
     public String getAvailable_time() {
@@ -109,12 +110,12 @@ public class Student {
         this.email = email;
     }
 
-    public Date getUpdate_time() {
-        return update_time;
+    public int getIntegral() {
+        return integral;
     }
 
-    public void setUpdate_time(Date update_time) {
-        this.update_time = update_time;
+    public void setIntegral(int integral) {
+        this.integral = integral;
     }
 
     public float getTotalLearningTime() {

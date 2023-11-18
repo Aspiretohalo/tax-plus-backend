@@ -11,7 +11,7 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long notice_id;
     private int course_id;
-    private String announcer;
+    private int announcer;
     private String notice_title;
     private String notice_text;
     private Date notice_time;
@@ -32,11 +32,11 @@ public class Notice {
         this.course_id = course_id;
     }
 
-    public String getAnnouncer() {
+    public int getAnnouncer() {
         return announcer;
     }
 
-    public void setAnnouncer(String announcer) {
+    public void setAnnouncer(int announcer) {
         this.announcer = announcer;
     }
 

@@ -11,7 +11,7 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long evaluation_id;
     private int course_id;
-    private String evaluator;
+    private int evaluator;
     private int evaluation_stars;
     private String evaluation_text;
     private Date evaluation_time;
@@ -32,11 +32,11 @@ public class Evaluation {
         this.course_id = course_id;
     }
 
-    public String getEvaluator() {
+    public int getEvaluator() {
         return evaluator;
     }
 
-    public void setEvaluator(String evaluator) {
+    public void setEvaluator(int evaluator) {
         this.evaluator = evaluator;
     }
 

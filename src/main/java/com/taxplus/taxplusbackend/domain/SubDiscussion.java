@@ -11,7 +11,7 @@ public class SubDiscussion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long post_id;
     private int parent_post_id;
-    private String commentator;
+    private int commentator;
     private String commentator_type;
     private String post_text;
     private Date post_time;
@@ -41,11 +41,11 @@ public class SubDiscussion {
         this.parent_post_id = parent_post_id;
     }
 
-    public String getCommentator() {
+    public int getCommentator() {
         return commentator;
     }
 
-    public void setCommentator(String commentator) {
+    public void setCommentator(int commentator) {
         this.commentator = commentator;
     }
 

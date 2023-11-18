@@ -10,7 +10,7 @@ public class Discussion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long post_id;
-    private String commentator;
+    private int commentator;
     private String commentator_type;
     private String post_text;
     private Date post_time;
@@ -32,11 +32,11 @@ public class Discussion {
         this.post_id = post_id;
     }
 
-    public String getCommentator() {
+    public int getCommentator() {
         return commentator;
     }
 
-    public void setCommentator(String commentator) {
+    public void setCommentator(int commentator) {
         this.commentator = commentator;
     }
 

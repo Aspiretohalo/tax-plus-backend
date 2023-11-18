@@ -11,7 +11,6 @@ public class CourseProgress {
     private long course_id;
     private long student_id;
     private float course_learning_progress;
-    private int last_watched_video_id;
     private boolean badge_got;
     private int confirmation_time;
 
@@ -45,14 +44,6 @@ public class CourseProgress {
 
     public void setCourse_learning_progress(float course_learning_progress) {
         this.course_learning_progress = course_learning_progress;
-    }
-
-    public int getLast_watched_video_id() {
-        return last_watched_video_id;
-    }
-
-    public void setLast_watched_video_id(int last_watched_video_id) {
-        this.last_watched_video_id = last_watched_video_id;
     }
 
     public boolean isBadge_got() {

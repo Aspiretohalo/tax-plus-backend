@@ -280,24 +280,5 @@ public class CourseController {
 
         return list;
     }
-
-    @PostMapping("/course/setFileData")
-    public R<Object> setFileData(@RequestBody FileData fileData) {
-        courseService.setFileData(fileData);
-        log.info("存入新事项：{}", fileData.getFile_name());
-
-        return R.success(null);
-    }
-
-    //    获取某一门课程的章节Chapter
-    @GetMapping("/course/getFileData")
-    public List<Map<String, FileData>> getFileData(@RequestParam("course_id") String course_id, ServletRequest request, ServletResponse response) {
-        HttpServletRequest req = (HttpServletRequest) request;
-
-        List<Map<String, FileData>> list;
-        list = courseService.getFileData(Integer.parseInt(course_id));
-
-
-        return list;
-    }
+    
 }

@@ -21,28 +21,6 @@ public class Course {
 
     private long course_teacher;
 
-    private String status;
-
-    private String tag_type;
-
-    private int choose_amount;
-    private Date course_begin_time;
-
-    public Date getCourse_begin_time() {
-        return course_begin_time;
-    }
-
-    public void setCourse_begin_time(Date course_begin_time) {
-        this.course_begin_time = course_begin_time;
-    }
-
-    public int getChoose_amount() {
-        return choose_amount;
-    }
-    public void setChoose_amount(int choose_amount) {
-        this.choose_amount = choose_amount;
-    }
-
     public long getCourse_id() {
         return course_id;
     }
@@ -89,21 +67,5 @@ public class Course {
 
     public void setCourse_teacher(long course_teacher) {
         this.course_teacher = course_teacher;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getTag_type() {
-        return tag_type;
-    }
-
-    public void setTag_type(String tag_type) {
-        this.tag_type = tag_type;
     }
 }
