@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public interface TeacherService extends IService<Teacher> {
+    void setTeacherAvatar(Teacher teacher);
+
+    void setTeacherMsg(Teacher teacher);
 
     Teacher selectTeacher(Teacher teacher);
 
     Teacher getInfo(String phone_number);
-
 
     List<Map<String, Teacher>> getTeacherMsgById(int teacher_id);
 }

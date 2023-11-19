@@ -51,10 +51,10 @@ public interface CourseMapper extends BaseMapper<Course> {
     @Select(value = "SELECT Courses.*, Teachers.teacher_name FROM CourseProgress JOIN Courses ON CourseProgress.course_id = Courses.course_id JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE CourseProgress.student_id = #{student_id};")
     List<Map<String, Course>> getCourses(int student_id);
 
-    @Select(value = "SELECT Courses.* , Teachers.teacher_name FROM courses JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE course_id = #{course_id};")
+    @Select(value = "SELECT  Courses.*,  Teachers.teacher_name, COUNT(DISTINCT Chapter.video_id) AS chapter_count FROM  courses JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id LEFT JOIN Chapter ON Courses.course_id = Chapter.course_id WHERE  courses.course_id = #{course_id} GROUP BY  Courses.course_id, Teachers.teacher_id;")
     List<Map<String, Course>> getCourseByCourseId(int course_id);
 
-    @Select(value = "SELECT *,Teachers.teacher_name FROM courses JOIN Teachers ON Courses.course_teacher = Teachers.teacher_id WHERE course_teacher = #{teacher_id};")
+    @Select(value = "SELECT  Courses.*, Teachers.teacher_name, COUNT(courseprogress.student_id) AS student_count FROM  courses JOIN  Teachers ON Courses.course_teacher = Teachers.teacher_id LEFT JOIN courseprogress ON Courses.course_id = courseprogress.course_id WHERE course_teacher = #{teacher_id} GROUP BY  Courses.course_id, Teachers.teacher_id;")
     List<Map<String, Course>> getTeacherCourses(int teacher_id);
 
     @Select(value = "insert into courses (course_name,course_description,course_label,course_teacher,course_url) values(#{course_name},#{course_description},#{course_label},#{course_teacher},#{course_url})")

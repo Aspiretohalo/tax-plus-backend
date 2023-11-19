@@ -17,7 +17,14 @@ import java.util.Map;
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
-
+    @Override
+    public void setStudentAvatar(Student student) {
+        studentMapper.setStudentAvatar(student);
+    }
+    @Override
+    public void setStudentMsg(Student student) {
+        studentMapper.setStudentMsg(student);
+    }
     @Override
     public List<Map<String, Student>> getStudentMsgById(int student_id) {
         List<Map<String, Student>> resultArray = studentMapper.getStudentMsgById(student_id);
@@ -28,6 +35,8 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
 
         return resultArray;
     }
+
+
 
     @Override
     public void setCourseIntendencies(Student student) {

@@ -280,5 +280,5 @@ public class CourseController {
 
         return list;
     }
-    
+
 }

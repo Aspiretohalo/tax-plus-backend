@@ -25,6 +25,19 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
+    @PutMapping("/setTeacherAvatar")
+    public R<Object> setTeacherAvatar(@RequestBody Teacher teacher) {
+        teacherService.setTeacherAvatar(teacher);
+        log.info("存入：{}", teacher.getAvatar());
+        return R.success(null);
+    }
+    @PutMapping("/setTeacherMsg")
+    public R<Object> setTeacherMsg(@RequestBody Teacher teacher) {
+        teacherService.setTeacherMsg(teacher);
+        log.info("存入：{}", teacher.getTeacher_name());
+        return R.success(null);
+    }
+
     @GetMapping("/getTeacherMsgById")
     public List<Map<String, Teacher>> getTeacherMsgById(@RequestParam("teacher_id") String student_id, ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;

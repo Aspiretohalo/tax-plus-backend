@@ -3,6 +3,7 @@ package com.taxplus.taxplusbackend.controller;
 import com.taxplus.taxplusbackend.common.R;
 import com.taxplus.taxplusbackend.domain.Course;
 import com.taxplus.taxplusbackend.domain.CourseProgress;
+import com.taxplus.taxplusbackend.domain.LivingCourse;
 import com.taxplus.taxplusbackend.domain.Student;
 import com.taxplus.taxplusbackend.service.StudentService;
 import com.taxplus.taxplusbackend.utils.JwtUtils;
@@ -24,6 +25,18 @@ import java.util.Map;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @PutMapping("/setStudentAvatar")
+    public R<Object> setStudentAvatar(@RequestBody Student student) {
+        studentService.setStudentAvatar(student);
+        log.info("存入：{}", student.getAvatar());
+        return R.success(null);
+    }
+    @PutMapping("/setStudentMsg")
+    public R<Object> setStudentMsg(@RequestBody Student student) {
+        studentService.setStudentMsg(student);
+        log.info("存入：{}", student.getStudent_name());
+        return R.success(null);
+    }
 
     @GetMapping("/getStudentMsgById")
     public List<Map<String, Student>> getStudentMsgById(@RequestParam("student_id") String student_id, ServletRequest request, ServletResponse response) {

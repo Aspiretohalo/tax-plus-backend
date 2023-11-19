@@ -2,7 +2,6 @@ package com.taxplus.taxplusbackend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import com.taxplus.taxplusbackend.domain.Student;
 import com.taxplus.taxplusbackend.domain.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -12,6 +11,10 @@ import java.util.Map;
 
 @Mapper
 public interface TeacherMapper extends BaseMapper<Teacher> {
+    @Select(value = "UPDATE teachers SET avatar=#{avatar} WHERE teacher_id = #{teacher_id};")
+    void setTeacherAvatar(Teacher teacher);
+    @Select(value = "UPDATE teachers SET teacher_name=#{teacher_name},email=#{email},gender=#{gender} WHERE teacher_id = #{teacher_id};")
+    void setTeacherMsg(Teacher teacher);
     @Select(value = "SELECT * FROM teachers  WHERE teacher_id = #{teacher_id};")
     List<Map<String, Teacher>> getTeacherMsgById(int teacher_id);
 

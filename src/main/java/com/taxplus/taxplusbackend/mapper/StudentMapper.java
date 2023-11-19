@@ -10,6 +10,10 @@ import java.util.Map;
 
 @Mapper
 public interface StudentMapper extends BaseMapper<Student> {
+    @Select(value = "UPDATE students SET avatar=#{avatar} WHERE student_id = #{student_id};")
+    void setStudentAvatar(Student student);
+    @Select(value = "UPDATE students SET student_name=#{student_name},email=#{email},gender=#{gender} WHERE student_id = #{student_id};")
+    void setStudentMsg(Student student);
     @Select(value = "SELECT * FROM students  WHERE student_id = #{student_id};")
     List<Map<String, Student>> getStudentMsgById(int student_id);
 

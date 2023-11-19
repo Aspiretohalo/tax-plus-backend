@@ -1,7 +1,6 @@
 package com.taxplus.taxplusbackend.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taxplus.taxplusbackend.domain.Student;
 import com.taxplus.taxplusbackend.domain.Teacher;
 import com.taxplus.taxplusbackend.mapper.TeacherMapper;
 import com.taxplus.taxplusbackend.service.TeacherService;
@@ -17,7 +16,14 @@ import java.util.Map;
 public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
-
+    @Override
+    public void setTeacherAvatar(Teacher teacher) {
+        teacherMapper.setTeacherAvatar(teacher);
+    }
+    @Override
+    public void setTeacherMsg(Teacher teacher) {
+        teacherMapper.setTeacherMsg(teacher);
+    }
     @Override
     public List<Map<String, Teacher>> getTeacherMsgById(int teacher_id) {
         List<Map<String, Teacher>> resultArray = teacherMapper.getTeacherMsgById(teacher_id);
